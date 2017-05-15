@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using WebApi2.Contexts;
 
 namespace WebApi2
 {
@@ -37,6 +39,9 @@ namespace WebApi2
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
+            services.AddDbContext<ContactsContext>(options =>
+             options.UseSqlServer (Configuration.GetConnectionString("DatabaseConnection")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +51,12 @@ namespace WebApi2
             loggerFactory.AddDebug();
 
             app.UseMvc();
+
+            var context = app.ApplicationServices.GetService<ContactsContext>();
+            if (context.Database.EnsureCreated())
+                context.Database.Migrate();
         }
+
+        
     }
 }

@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApi2.Model;
+﻿using WebApi2.Repository;
 
 namespace WebApi2.Services
 {
-    public class ContactService
+    public class ContactService: IContactService
     {
 
-        public List<Contact> _contacts;
+        // public List<Contact> _contacts;
 
-        public ContactService()
+        /*public ContactService()
         {
             _contacts = new List<Contact>();
             _contacts.Add(new Contact(1,"Simo", "Pöppönen", "0401234567", "Kotipellonkatu 9","53850","Lappeenranta"));
@@ -62,6 +58,32 @@ namespace WebApi2.Services
         {
             DeleteContact(contact.Id);
             SaveContact(contact);
+        }*/
+
+        private readonly IContactsRepository _contactsrepository;
+
+        public List<Contact> FindAllContacts()
+        {
+            return _contactsrepository.FindAll;
         }
+
+        public List<Contact> FindContactsByFirstName(string firstName)
+        {
+
+        }
+
+        public void SaveContact(Contact contact)
+        {
+
+        }
+        public void EditContact(Contact contact)
+        {
+
+        }
+        public void DeleteContact(int id)
+        {
+
+        }
+
     }
 }
