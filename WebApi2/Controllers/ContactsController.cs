@@ -14,7 +14,13 @@ namespace WebApi2.Controllers
     [Route("api/contacts")]
     public class ContactsController : Controller
     {
-        private static ContactService _contactService = new ContactService();
+        //private static ContactService _contactService = new ContactService();
+        private readonly IContactService _contactService;
+
+        public ContactsController (IContactService contactService)
+        {
+            _contactService = contactService;
+        }
 
         // GET api/contacts
         [HttpGet]
@@ -27,7 +33,7 @@ namespace WebApi2.Controllers
         [HttpGet("{id}")]
         public Contact Get(int id)
         {
-            return _contactService.FindContactsById(id);
+            return _contactService.FindById(id);
         }
 
         // POST api/contacts
@@ -40,10 +46,10 @@ namespace WebApi2.Controllers
          }
 
         // PUT api/contacts/
-        [HttpPut]
-        public void Put(Contact contact)
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody]Contact contact)
         {
-            _contactService.EditContact(contact);            
+            _contactService.EditContact(contact);
         }
 
         // DELETE api/contacts/5

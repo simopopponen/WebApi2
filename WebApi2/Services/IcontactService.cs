@@ -9,7 +9,7 @@ namespace WebApi2.Services
     public interface IContactService
     {
         List<Contact> FindAllContacts();
-        List<Contact> FindContactsByFirstName(string firstName);
+        Contact FindById(int id);
         void SaveContact(Contact contact);
         void EditContact(Contact contact);
         void DeleteContact(int id);

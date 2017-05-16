@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using WebApi2.Contexts;
+using WebApi2.Services;
+using WebApi2.Repository;
 
 namespace WebApi2
 {
@@ -42,6 +44,8 @@ namespace WebApi2
             services.AddDbContext<ContactsContext>(options =>
              options.UseSqlServer (Configuration.GetConnectionString("DatabaseConnection")));
 
+            services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IContactsRepository, ContactsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,5 +10,6 @@ namespace WebApi2.Repository
         void Create(Contact contact);
         void Update(Contact contact);
         void Delete(int id);
+        
     }
 }

@@ -26,6 +26,8 @@ namespace WebApi2.Model
             _city = city;
         }
 
+        public Contact() { }
+
         public int Id
         {
             get { return _id; }

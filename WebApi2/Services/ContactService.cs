@@ -1,4 +1,6 @@
-﻿using WebApi2.Repository;
+﻿using System.Collections.Generic;
+using WebApi2.Model;
+using WebApi2.Repository;
 
 namespace WebApi2.Services
 {
@@ -62,27 +64,32 @@ namespace WebApi2.Services
 
         private readonly IContactsRepository _contactsrepository;
 
+        public ContactService(IContactsRepository contactsRepository)
+        {
+            _contactsrepository = contactsRepository;
+        }
+        
         public List<Contact> FindAllContacts()
         {
-            return _contactsrepository.FindAll;
+            return _contactsrepository.FindAll();
         }
 
-        public List<Contact> FindContactsByFirstName(string firstName)
+        public Contact FindById(int id)
         {
-
+            return _contactsrepository.FindById(id);
         }
 
         public void SaveContact(Contact contact)
         {
-
+            _contactsrepository.Create(contact);
         }
         public void EditContact(Contact contact)
         {
-
+            _contactsrepository.Update(contact);
         }
         public void DeleteContact(int id)
         {
-
+            _contactsrepository.Delete(id);
         }
 
     }
